@@ -1,0 +1,32 @@
+#TODO add headless image
+image: gradle:6.9.1-jdk11
+
+stages:
+  - build
+  - run-test
+
+build:
+  stage: build
+  script:
+    - git fetch origin master
+    - gradle build -x test
+    - gradle compileTestJava -x test
+  cache:
+    paths:
+      - build/
+      - .gradle/
+  retry:
+    max: 2
+    when: runner_system_failure
+
+.test:
+  stage: run-test
+  script:
+    - gradle clean test -Dcucumber.filter.tags="@Smoke"
+  artifacts:
+    when: always
+    paths:
+      - target/site/serenity
+  retry:
+    max: 2
+    when: runner_system_failure

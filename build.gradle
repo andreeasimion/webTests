@@ -1,0 +1,58 @@
+buildscript {
+    repositories {
+        mavenCentral()
+    }
+    dependencies {
+        classpath("net.serenity-bdd:serenity-gradle-plugin:2.4.34")
+    }
+}
+
+
+
+plugins {
+    id 'java'
+}
+defaultTasks 'clean', 'test', 'aggregate'
+
+apply plugin: 'java'
+apply plugin: 'net.serenity-bdd.aggregator'
+
+compileJava { options.encoding = "UTF-8" }
+compileTestJava { options.encoding = "UTF-8" }
+
+
+group 'miro.ui'
+version '1.0-SNAPSHOT'
+
+repositories {
+    mavenCentral()
+}
+
+
+dependencies {
+    implementation group: 'net.serenity-bdd', name: 'serenity-core', version: '2.5.8'
+    implementation group: 'net.serenity-bdd', name: 'serenity-cucumber6', version: '2.5.8'
+    implementation group: 'io.cucumber', name: 'cucumber-core', version: '6.11.0'
+    testImplementation group: 'io.cucumber', name: 'cucumber-junit', version: '6.11.0'
+    testImplementation group: 'org.assertj', name: 'assertj-core', version: '3.20.2'
+    implementation "com.github.romankh3:image-comparison:4.4.0"
+
+
+    compileOnly group: 'org.projectlombok', name: 'lombok', version: '1.18.20'
+    annotationProcessor group: 'org.projectlombok', name: 'lombok', version: '1.18.20'
+
+
+
+
+}
+
+test {
+    println "Running tests locally"
+
+    testLogging.showStandardStreams = true
+    systemProperties System.getProperties()
+}
+
+gradle.startParameter.continueOnFailure = true
+
+test.finalizedBy(aggregate)
