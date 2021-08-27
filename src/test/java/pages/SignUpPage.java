@@ -17,7 +17,6 @@ public class SignUpPage extends CommonPage {
     By passwordInput = By.cssSelector("input#password");
     By termsCheckBox = By.cssSelector("label.mr-checkbox-1__check");
 
-
     @Step
     public void signUp(String userName, String email, String password) {
         fillInSignUpInputFields(userName, email, password);
@@ -30,10 +29,5 @@ public class SignUpPage extends CommonPage {
         setText($(usernameInput), userName);
         setText($(emailInput), email);
         setText($(passwordInput), password);
-    }
-
-    @Step
-    public void clickSubmit() {
-        click($(submit));
     }
 }
