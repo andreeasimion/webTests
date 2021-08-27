@@ -19,9 +19,13 @@ import java.io.IOException;
 
 public class ScreenshotUtil {
 
-    public static void takeScreenshotOfThePage() throws IOException {
+    public static void takeScreenshotOfThePage() {
         File scrFile = ((TakesScreenshot) Serenity.getDriver()).getScreenshotAs(OutputType.FILE);
-        FileUtils.copyFile(scrFile, new File(String.format("src/test/resources/screenshot/actualImage.png")));
+        try {
+            FileUtils.copyFile(scrFile, new File("src/test/resources/screenshot/actualImage.png"));
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 
     public static ImageComparisonState compareImages() {

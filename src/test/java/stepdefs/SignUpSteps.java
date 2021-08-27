@@ -7,17 +7,15 @@ import io.cucumber.java.en.When;
 import net.serenitybdd.core.annotations.events.BeforeScenario;
 import net.serenitybdd.core.steps.UIInteractionSteps;
 import pages.SignUpPage;
-import shared.CommonActions;
+import shared.CommonPage;
 import utils.ScreenshotUtil;
-
-import java.io.IOException;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
 public class SignUpSteps extends UIInteractionSteps {
     SignUpPage register;
+    CommonPage action;
     private String email;
-    CommonActions action;
 
     @BeforeScenario
     public void generateEmail() {
@@ -62,7 +60,7 @@ public class SignUpSteps extends UIInteractionSteps {
     }
 
     @When("I take a screenshot")
-    public void iTakeAScreenshot() throws IOException {
+    public void iTakeAScreenshot() {
         $(register.usernameInput).waitUntilVisible();
         ScreenshotUtil.takeScreenshotOfThePage();
     }
@@ -83,12 +81,12 @@ public class SignUpSteps extends UIInteractionSteps {
         $(register.termsError).shouldBeCurrentlyVisible();
     }
 
-    @When("I click terms")
+    @When("I click terms link")
     public void iClickTerms() {
         register.click($(register.termsLink));
     }
 
-    @Then("The page is open")
+    @Then("The Terms and Conditions page is open")
     public void thePageIsOpen() {
         action.navigateToNextTab();
         String checkEmailUrl = action.getCurrentUrl();

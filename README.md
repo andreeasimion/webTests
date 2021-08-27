@@ -2,10 +2,10 @@
 
 Tools:
 
-- Serenity - good reporting
+- Serenity
 - Cucumber
-- Selenium WebDrive
-- Romankh3 - image-comparison
+- Selenium WebDriver
+- Romankh3
 
 ## Java SDK
 
@@ -13,7 +13,7 @@ Compatible with Java 11
 
 ## Build tool
 
-Gradle 6.7.1
+Gradle 6.8
 
 ## Plugins needed
 
@@ -29,10 +29,11 @@ gradle clean test -Dcucumber.filter.tags="@Smoke"
 
 ## Reporting
 
-The Serenity test report can be found here: `target/site/serenity/index.html`.
-The report is generated after the tests finished running
+The Serenity test report can be found here: `/target/site/serenity/index.html`. The report is generated after the tests
+finished running
 
 Notes:
+
 - Base URL is configured in the `serenity.conf` file;
 - Only chrome driver has been configured
 - More scenarios could have been automated, but I selected a few of them.
