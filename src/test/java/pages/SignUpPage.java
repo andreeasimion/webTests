@@ -9,7 +9,7 @@ public class SignUpPage extends CommonPage {
     public final By usernameInput = By.cssSelector("input#name");
     public final By nameError = By.cssSelector("label#nameError");
     public final By emailError = By.cssSelector("label#emailError");
-    public final By passwordError = By.cssSelector("label#passwordError");
+    public final By passwordError = By.cssSelector("#signup-form-password.signup__error-wrap-login");
     public final By termsError = By.cssSelector("label#termsError");
     public final By termsLink = By.cssSelector("span#signup-error-emptyTerms a:nth-child(1) > span");
     public final By submit = By.cssSelector("form > button[type='submit']");
