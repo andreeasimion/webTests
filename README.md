@@ -36,4 +36,12 @@ Notes:
 
 - Base URL is configured in the `serenity.conf` file;
 - Only chrome driver has been configured
-- More scenarios could have been automated, but I selected a few of them.
+- The following scenarios could have been automated:
+    - sign up and accept news and updates
+    - check Accept terms pop-up when you select to log in with a 3rd party (compare pictures)
+    - navigate to Log in page from Sign up
+    - check more password errors/ warnings
+
+* more fields validations could be checked at BE level (if exists)
+    
+    
