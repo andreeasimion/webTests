@@ -6,15 +6,15 @@ import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
 import net.serenitybdd.core.annotations.events.BeforeScenario;
 import net.serenitybdd.core.steps.UIInteractionSteps;
+import pages.CommonPage;
 import pages.SignUpPage;
-import shared.CommonPage;
 import utils.ScreenshotUtil;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
 public class SignUpSteps extends UIInteractionSteps {
     SignUpPage register;
-    CommonPage action;
+    CommonPage commonPage;
     private String email;
 
     @BeforeScenario
@@ -34,7 +34,7 @@ public class SignUpSteps extends UIInteractionSteps {
 
     @Then("I'm redirected to Check email page")
     public void checkEmailPage() {
-        String checkEmailUrl = action.getCurrentUrl();
+        String checkEmailUrl = commonPage.getCurrentUrl();
         assertThat(checkEmailUrl).contains("email-confirm");
     }
 
@@ -60,9 +60,8 @@ public class SignUpSteps extends UIInteractionSteps {
     }
 
     @When("I take a screenshot")
-    public void iTakeAScreenshot() {
-        $(register.usernameInput).waitUntilVisible();
-        ScreenshotUtil.takeScreenshotOfThePage();
+    public void registrationScreenshot() {
+        commonPage.takeAScreenshot($(register.usernameInput));
     }
 
     @Then("Register screen is as expected")
@@ -73,7 +72,7 @@ public class SignUpSteps extends UIInteractionSteps {
     @When("I submit registration form without accepting terms")
     public void iSubmitRegistrationFormWithoutAcceptingTerms() {
         register.fillInSignUpInputFields("Andreea", email, "M78B&!!%h%@o");
-        register.clickSubmit();
+        register.click($(register.submit));
     }
 
     @Then("Terms and conditioning checkbox returns an error")
@@ -88,8 +87,8 @@ public class SignUpSteps extends UIInteractionSteps {
 
     @Then("The Terms and Conditions page is open")
     public void thePageIsOpen() {
-        action.navigateToNextTab();
-        String checkEmailUrl = action.getCurrentUrl();
+        commonPage.navigateToNextTab();
+        String checkEmailUrl = commonPage.getCurrentUrl();
         assertThat(checkEmailUrl).contains("terms-of-service");
     }
 }

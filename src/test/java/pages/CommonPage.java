@@ -1,10 +1,11 @@
-package shared;
+package pages;
 
 import net.serenitybdd.core.Serenity;
 import net.serenitybdd.core.pages.WebElementFacade;
 import net.thucydides.core.annotations.Step;
 import net.thucydides.core.pages.PageObject;
 import org.apache.commons.lang3.RandomStringUtils;
+import utils.ScreenshotUtil;
 
 import java.util.ArrayList;
 
@@ -34,8 +35,15 @@ public class CommonPage extends PageObject {
         return Serenity.getDriver().getCurrentUrl();
     }
 
+    @Step
     public String createUniqueEmail() {
         String generatedString = RandomStringUtils.randomAlphanumeric(5);
         return String.format("miro+%s@gmail.com", generatedString);
+    }
+
+    @Step
+    public void takeAScreenshot(WebElementFacade element) {
+        $(element).waitUntilVisible();
+        ScreenshotUtil.takeScreenshotOfThePage();
     }
 }
